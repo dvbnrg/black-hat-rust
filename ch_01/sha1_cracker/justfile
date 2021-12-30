@@ -1,0 +1,11 @@
+# Default
+default: all
+    
+
+# All
+all: 
+    cargo test
+
+# Help
+help:
+    @just -l
