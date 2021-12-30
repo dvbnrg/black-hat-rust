@@ -5,11 +5,18 @@ test_suite! {
     use assert_cmd::prelude::*;
     use predicates::prelude::*;
     use std::process::Command;
-    test password_exists_in_list() {
+    test password_exists_in_list_1() {
         let mut cmd = Command::cargo_bin("sha1_cracker").unwrap();
         cmd.arg("./wordlist.txt");
         cmd.arg("a4ff81efb344996b21e9dc8229c5eb01bb226700");
         cmd.assert().success();
-        cmd.assert().stdout(predicate::str::contains("longhorns"));
+        cmd.assert().stdout(predicate::str::contains("Password found: "));
+    }
+    test password_exists_in_list_2() {
+        let mut cmd = Command::cargo_bin("sha1_cracker").unwrap();
+        cmd.arg("./wordlist.txt");
+        cmd.arg("ec461b5480380ecf863d9802edbe70152aee1c46");
+        cmd.assert().success();
+        cmd.assert().stdout(predicate::str::contains("Password found: "));
     }
 }
