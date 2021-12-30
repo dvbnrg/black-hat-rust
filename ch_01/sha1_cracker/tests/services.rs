@@ -19,4 +19,11 @@ test_suite! {
         cmd.assert().success();
         cmd.assert().stdout(predicate::str::contains("Password found: "));
     }
+    test password_exists_in_list_3() {
+        let mut cmd = Command::cargo_bin("sha1_cracker").unwrap();
+        cmd.arg("./wordlist.txt");
+        cmd.arg("ef89a3a842b0384565a210f0122804f411fe51fb");
+        cmd.assert().success();
+        cmd.assert().stdout(predicate::str::contains("Password found: "));
+    }
 }
